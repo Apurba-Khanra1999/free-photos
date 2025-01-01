@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Downloader</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto py-8 px-4">
+    <h1 class="text-4xl font-extrabold text-center text-blue-600 mb-8">
+      Pexels Photo Downloader
+    </h1>
+    <!-- Search Section -->
+    <div class="flex justify-center items-center">
+      <input
+        id="search-input"
+        type="text"
+        class="border rounded-l-lg p-3 w-full max-w-md"
+        placeholder="Search for photos..."
+      />
+      <button
+        id="search-btn"
+        class="bg-blue-500 text-white px-4 py-3 rounded-r-lg hover:bg-blue-600"
+      >
+        Search
+      </button>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+      <!-- Photos will be displayed here -->
+    </div>
+
+    <!-- Load More Button -->
+    <div id="load-more-container" class="text-center mt-8 hidden">
+      <button
+        id="load-more-btn"
+        class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600"
+      >
+        Load More
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal for Resolution Selection -->
+<div
+id="resolution-modal"
+class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+>
+<div class="bg-white rounded-lg shadow-lg p-6 w-96">
+  <h2 class="text-xl font-bold mb-4">Select Image Resolution</h2>
+  <ul id="resolution-options" class="space-y-4">
+    <!-- Resolution options will be dynamically added here -->
+  </ul>
+  <button
+    id="close-modal"
+    class="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+  >
+    Close
+  </button>
+</div>
+</div>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
