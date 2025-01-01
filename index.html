@@ -12,62 +12,91 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-W534PT65');</script>
     <!-- End Google Tag Manager -->
+
+
+
+    <style>
+        /* Spinner animation for loading */
+.animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+    </style>
 </head>
 <body class="bg-gray-100">
-  <div class="container mx-auto py-8 px-4">
-    <h1 class="text-4xl font-extrabold text-center text-blue-600 mb-8">
-      Pexels Photo Downloader
-    </h1>
+
+    <!-- Main Container -->
+<div class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-4 shadow-lg">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-2xl font-bold">Flex Photos</h1>
+        <p class="text-sm opacity-90">Made with 💖 by Apurba</p>
+      </div>
+    </header>
+  
     <!-- Search Section -->
-    <div class="flex justify-center items-center">
-      <input
-        id="search-input"
-        type="text"
-        class="border rounded-l-lg p-3 w-full max-w-md"
-        placeholder="Search for photos..."
-      />
-      <button
-        id="search-btn"
-        class="bg-blue-500 text-white px-4 py-3 rounded-r-lg hover:bg-blue-600"
-      >
-        Search
-      </button>
-    </div>
-
+    <section class="container mx-auto px-6 mt-6">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search photos..."
+          class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <button
+          id="search-btn"
+          class="bg-blue-500 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-600 transition"
+        >
+          Search
+        </button>
+      </div>
+    </section>
+  
     <!-- Photo Gallery -->
-    <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-      <!-- Photos will be displayed here -->
-    </div>
-
-    <!-- Load More Button -->
-    <div id="load-more-container" class="text-center mt-8 hidden">
+    <section class="container mx-auto px-6 mt-8">
+      <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Photos will be dynamically loaded here -->
+      </div>
+    </section>
+  
+  </div>
+  
+  <!-- Resolution Selection Modal -->
+  <div
+    id="resolution-modal"
+    class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden"
+  >
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Select Image Resolution</h2>
+      <ul id="resolution-options" class="space-y-4">
+        <!-- Dynamically added resolution options -->
+      </ul>
       <button
-        id="load-more-btn"
-        class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600"
+        id="close-modal"
+        class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
       >
-        Load More
+        Close
       </button>
     </div>
   </div>
 
-  <!-- Modal for Resolution Selection -->
+<!-- Loading Spinner -->
 <div
-id="resolution-modal"
-class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+  id="loading-spinner"
+  class="flex justify-center items-center mt-8 hidden"
 >
-<div class="bg-white rounded-lg shadow-lg p-6 w-96">
-  <h2 class="text-xl font-bold mb-4">Select Image Resolution</h2>
-  <ul id="resolution-options" class="space-y-4">
-    <!-- Resolution options will be dynamically added here -->
-  </ul>
-  <button
-    id="close-modal"
-    class="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-  >
-    Close
-  </button>
+  <div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
 </div>
-</div>
+  
 
 
 <!-- Google Tag Manager (noscript) -->
