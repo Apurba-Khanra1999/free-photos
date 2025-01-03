@@ -5,16 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photo Downloader</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W534PT65');</script>
-    <!-- End Google Tag Manager -->
-
-
-
     <style>
         /* Spinner animation for loading */
 .animate-spin {
@@ -30,26 +20,31 @@
     }
   }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+
 </head>
 <body class="bg-gray-100">
 
     <!-- Main Container -->
 <div class="min-h-screen bg-gray-100">
     <!-- Header -->
-    <header class="bg-[url('assets/back_banner.jpg')]  lg:h-[500px] bg-cover text-white py-4 shadow-lg">
-      <div class="container lg:h-[500px] px-6">
+    <header class="bg-[url('assets/back_banner.jpg')] relative lg:h-[500px] bg-cover text-white py-4 shadow-lg">
+      <div class="absolute inset-0 bg-black/50"></div>
+      <div class="absolute container lg:h-[500px] px-6">
         <div>
-            <h1 class="text-2xl font-bold">Flex Photos</h1>
+            <img src="assets/logo.png" alt="">
         </div>
         <div class="flex justify-items-center justify-center content-center items-center text-center h-full w-full">
             <div class="w-2/4 ">
-                <h1 class="text-3xl font-semibold">The best free stock photos, royalty free images & videos shared by creators.</h1>
+                <h1 class="text-3xl font-semibold ">The best free stock photos, royalty free images & videos shared by creators.</h1>
                 <div class="flex flex-col sm:flex-row items-center gap-2 py-8">
                     <input
                       id="search-input"
                       type="text"
                       placeholder="Search photos..."
-                      class="flex-1 w-full px-4 placeholder-white py-3 bg-transparent border rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+                      class="flex-1 w-full px-4 placeholder-white py-3 bg-transparent border rounded-full focus:ring-1 focus:ring-white focus:outline-none"
                     />
                     <button
                       id="search-btn"
@@ -73,23 +68,30 @@
   </div>
   
   <!-- Resolution Selection Modal -->
-  <div
-    id="resolution-modal"
-    class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden"
-  >
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">Select Image Resolution</h2>
-      <ul id="resolution-options" class="space-y-4">
-        <!-- Dynamically added resolution options -->
-      </ul>
-      <button
-        id="close-modal"
-        class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
-      >
-        Close
-      </button>
-    </div>
+<!-- Resolution Selection Modal -->
+<div
+  id="resolution-modal"
+  class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden"
+>
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
+    <img
+      id="selected-image"
+      class="w-full h-40 object-cover rounded-lg mb-4"
+      src=""
+      alt="Selected Photo"
+    />
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Select Image Resolution</h2>
+    <ul id="resolution-options" class="space-y-4">
+      <!-- Dynamically added resolution options -->
+    </ul>
+    <button
+      id="close-modal"
+      class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
+    >
+      Close
+    </button>
   </div>
+</div>
 
 <!-- Loading Spinner -->
 <div
@@ -98,13 +100,7 @@
 >
   <div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
 </div>
-  
 
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W534PT65"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
   <script src="app.js"></script>
 </body>
