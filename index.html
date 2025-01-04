@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photo Downloader</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <style>
         /* Spinner animation for loading */
 .animate-spin {
@@ -30,65 +32,58 @@
     <!-- Main Container -->
 <div class="min-h-screen bg-gray-100">
     <!-- Header -->
-    <header class="bg-[url('assets/back_banner.jpg')] relative lg:h-[600px] bg-cover text-white py-4 shadow-lg">
-      <div class="absolute inset-0 bg-black/50"></div>
-      <div class="absolute lg:h-[500px] w-full px-6">
-        <div>
-            <img src="assets/logo.png" alt="">
+    <header class="relative lg:h-[550px] bg-cover text-white py-4 shadow-lg overflow-hidden">
+        <!-- Carousel Wrapper -->
+        <div id="carousel" class="absolute inset-0 z-0">
+          <!-- Images -->
+          <div class="absolute inset-0 flex transition-transform duration-1000 ease-in-out">
+            <div class="flex-shrink-0 w-full h-full bg-[url('assets/back_banner.jpg')] bg-cover bg-center"></div>
+            <div class="flex-shrink-0 w-full h-full bg-[url('assets/back_banner_1.jpg')] bg-cover bg-center"></div>
+            <div class="flex-shrink-0 w-full h-full bg-[url('assets/back_banner_2.jpg')] bg-cover bg-center"></div>
+          </div>
         </div>
-        <div class="flex justify-items-center justify-center content-center items-center text-center h-full w-full">
-            <div class="w-2/4 ">
-                <h1 class="text-3xl font-semibold ">The best free stock photos, royalty free images & videos shared by creators.</h1>
-                <div class="flex flex-col sm:flex-row items-center gap-2 py-8">
-                    <input
-                      id="search-input"
-                      type="text"
-                      placeholder="Search photos..."
-                      class="flex-1 w-full px-4 placeholder-white py-3 bg-transparent border rounded-full focus:ring-1 focus:ring-white focus:outline-none"
-                    />
-                    <button
-                      id="search-btn"
-                      class=" font-semibold bg-white border-2 text-black px-6 py-3 rounded-full shadow hover:bg-transparent hover:opacity-90 hover:text-white opacity-60 transition"
-                    >
-                      Search
-                    </button>
-                  </div>
-                  <!-- Category Tags -->
-                    <div class="flex flex-wrap justify-center gap-3 mt-4">
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300 ">
-                        Nature
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Technology
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Animals
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Food
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Travel
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Architecture
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Cars
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Space
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Landscape
-                        </button>
-                        <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">
-                        Abstract
-                        </button>
-                    </div>
+      
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50 z-10"></div>
+        
+          <!-- Logo at Top-Left -->
+        <div class="absolute top-4 left-4 z-30">
+            <img src="assets/logo.png" alt="Logo" class="h-12 w-auto">
+        </div>
+        <!-- Content -->
+        <div class="relative z-20 w-full lg:h-[500px] px-6 flex flex-col justify-center items-center text-center">
+          <div class="w-2/4">
+            <h1 class="text-3xl font-semibold">
+              The best free stock photos, royalty free images & videos shared by creators.
+            </h1>
+            <div class="flex flex-col sm:flex-row items-center gap-2 py-8">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search photos..."
+                class="flex-1 w-full px-4 placeholder-white py-3 bg-transparent border rounded-full focus:ring-1 focus:ring-white focus:outline-none"
+              />
+              <button
+                id="search-btn"
+                class="font-semibold bg-white border-2 text-black px-6 py-3 rounded-full shadow hover:bg-transparent hover:opacity-90 hover:text-white opacity-60 transition"
+              >
+                Search
+              </button>
             </div>
+            <!-- Category Tags -->
+            <div class="flex flex-wrap justify-center gap-3 mt-4">
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Nature</button>
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Technology</button>
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Animals</button>
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Food</button>
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Travel</button>
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Cars</button>
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Buildings</button>
+              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Abstract</button>
+              <!-- Add more tags if needed -->
+            </div>
+          </div>
         </div>
-      </div>
     </header>
   
     <!-- Photo Gallery -->
@@ -133,7 +128,19 @@
 >
   <div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
 </div>
+  
 
+    <!-- Add JavaScript for Carousel -->
+    <script>
+        const carousel = document.querySelector("#carousel > div");
+        let currentIndex = 0;
+        const totalSlides = carousel.children.length;
+      
+        setInterval(() => {
+          currentIndex = (currentIndex + 1) % totalSlides;
+          carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }, 6000); // Change image every 5 seconds
+      </script>
 
   <script src="app.js"></script>
 </body>
