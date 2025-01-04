@@ -14,8 +14,8 @@ let isLoading = false; // Prevent concurrent API requests
 // Fetch photos from Pexels API
 const fetchPhotos = async (query, page) => {
   const endpoint = query
-    ? `https://api.pexels.com/v1/search?query=${query}&per_page=12&page=${page}`
-    : `https://api.pexels.com/v1/curated?per_page=12&page=${page}`;
+    ? `https://api.pexels.com/v1/search?query=${query}&per_page=80&page=${page}`
+    : `https://api.pexels.com/v1/curated?per_page=80&page=${page}`;
   try {
     const response = await fetch(endpoint, {
       headers: {
@@ -141,3 +141,4 @@ window.addEventListener("scroll", () => {
 
 // Initial load
 loadPhotos();
+  
