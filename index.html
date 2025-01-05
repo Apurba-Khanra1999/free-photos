@@ -5,26 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photo Downloader</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <style>
         /* Spinner animation for loading */
-.animate-spin {
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% {
+            transform: rotate(0deg);
+            }
+            100% {
+            transform: rotate(360deg);
+            }
+        }   
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 
 </head>
 <body class="bg-gray-100">
@@ -44,14 +45,14 @@
         </div>
       
         <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/50 z-10"></div>
+        <div class="absolute inset-0 bg-black/50"></div>
         
           <!-- Logo at Top-Left -->
         <div class="absolute top-4 left-4 z-30">
             <img src="assets/logo.png" alt="Logo" class="h-12 w-auto">
         </div>
         <!-- Content -->
-        <div class="relative z-20 w-full lg:h-[500px] px-6 flex flex-col justify-center items-center text-center">
+        <div class="relative w-full lg:h-[500px] px-6 flex flex-col justify-center items-center text-center">
           <div class="w-2/4">
             <h1 class="text-3xl font-semibold">
               The best free stock photos, royalty free images & videos shared by creators.
@@ -71,24 +72,23 @@
               </button>
             </div>
             <!-- Category Tags -->
-            <div class="flex flex-wrap justify-center gap-3 mt-4">
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Nature</button>
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Technology</button>
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Animals</button>
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Food</button>
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Travel</button>
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Cars</button>
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Buildings</button>
-              <button class="bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300">Abstract</button>
-              <!-- Add more tags if needed -->
-            </div>
+                <div class="flex flex-wrap justify-center gap-3 mt-4">
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Nature">Nature</button>
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Technology">Technology</button>
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Animals">Animals</button>
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Food">Food</button>
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Travel">Travel</button>
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Cars">Cars</button>
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Buildings">Buildings</button>
+                <button class="category-tab bg-transparent text-white border-2 px-6 py-2 rounded-full shadow hover:bg-gray-100 hover:text-black transform hover:scale-105 transition duration-300" data-category="Abstract">Abstract</button>
+                </div>
           </div>
         </div>
     </header>
   
     <!-- Photo Gallery -->
     <section class="container mx-auto px-6 mt-8">
-      <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         <!-- Photos will be dynamically loaded here -->
       </div>
     </section>
@@ -97,39 +97,39 @@
   
   <!-- Resolution Selection Modal -->
 <!-- Resolution Selection Modal -->
-<div
-  id="resolution-modal"
-  class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden"
->
-  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-    <img
-      id="selected-image"
-      class="w-full h-40 object-cover rounded-lg mb-4"
-      src=""
-      alt="Selected Photo"
-    />
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Select Image Resolution</h2>
-    <ul id="resolution-options" class="space-y-4">
-      <!-- Dynamically added resolution options -->
-    </ul>
-    <button
-      id="close-modal"
-      class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
-    >
-      Close
-    </button>
+<div id="resolution-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
+    <div class="bg-transparent border-2 rounded-2xl shadow-2xl p-6 w-2/3 h-2/3 flex gap-4">
+      <!-- Loader -->
+      <div id="modal-loader" class="hidden flex-col gap-4 w-full flex items-center justify-center">
+        <div class="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full">
+          <div class="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"></div>
+        </div>
+      </div>
+  
+      <!-- Image & Resolutions -->
+      <img
+        id="selected-image"
+        class="w-full h-full object-cover rounded-xl mb-4 hidden"
+        src=""
+        alt="Selected Photo"
+      />
+      <div>
+          <h2 class="text-2xl text-center font-bold text-white mb-4">Image Resolution</h2>
+          <ul id="resolution-options" class="space-y-4 hidden">
+          <!-- Dynamically added resolution options -->
+          </ul>
+          <button id="close-modal" class="mt-4 bg-transparent border hover:border-red-600 text-white px-4 py-2 rounded-full w-full shadow hover:bg-red-600 transition"><i class="ri-close-large-line"></i>
+              Close
+          </button>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- Loading Spinner -->
-<div
-  id="loading-spinner"
-  class="flex justify-center items-center mt-8 hidden"
->
-  <div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-</div>
   
 
+<!-- Loading Spinner -->
+<div id="loading-spinner" class="flex justify-center items-center mt-8 hidden">
+  <div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+</div>
     <!-- Add JavaScript for Carousel -->
     <script>
         const carousel = document.querySelector("#carousel > div");

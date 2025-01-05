@@ -31,6 +31,20 @@ const fetchPhotos = async (query, page) => {
 };
 
 
+// Select all category tabs
+const categoryTabs = document.querySelectorAll(".category-tab");
+// Add click event listener to each category tab
+categoryTabs.forEach((tab) => {
+    tab.addEventListener("click", async () => {
+      const category = tab.getAttribute("data-category"); // Get the category from data-category attribute
+      currentQuery = category; // Update the current query
+      currentPage = 1; // Reset the page count
+      gallery.innerHTML = ""; // Clear the gallery
+      await loadPhotos(); // Load photos for the selected category
+    });
+  });
+
+
 // Display photos in the gallery
 const displayPhotos = (photos) => {
   photos.forEach((photo) => {
@@ -73,45 +87,64 @@ const loadPhotos = async () => {
 const openResolutionModal = (src) => {
     // Set the selected image in the modal
     const selectedImage = document.getElementById("selected-image");
-    selectedImage.src = src.large; // Set the large version of the image as default
-    
-    resolutionOptions.innerHTML = ""; // Clear previous options
+    const modalLoader = document.getElementById("modal-loader");
+    const resolutionOptions = document.getElementById("resolution-options");
   
-    // Available resolutions
-    const resolutions = [
-      { label: "Original", url: src.original },
-      { label: "Large", url: src.large },
-      { label: "Medium", url: src.medium },
-      { label: "Small", url: src.small },
-      { label: "Tiny", url: src.tiny },
-    ];
-  
-    // Create resolution options
-    resolutions.forEach((res) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <button
-          class="w-full text-left bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          data-url="${res.url}"
-        >
-          ${res.label}
-        </button>
-      `;
-  
-      // Add click event to download the image
-      li.querySelector("button").addEventListener("click", () => {
-        const downloadLink = document.createElement("a");
-        downloadLink.href = res.url;
-        downloadLink.download = "image.jpg"; // Set a default file name
-        downloadLink.click();
-      });
-  
-      resolutionOptions.appendChild(li);
-    });
+    // Show the loader and hide other elements
+    modalLoader.classList.remove("hidden");
+    selectedImage.classList.add("hidden");
+    resolutionOptions.classList.add("hidden");
   
     // Show the modal
     resolutionModal.classList.remove("hidden");
+  
+    // Set the selected image
+    selectedImage.src = src.original;
+  
+    // Clear previous resolution options
+    resolutionOptions.innerHTML = "";
+  
+    // Available resolutions
+    const resolutions = [
+      { label: "<i class='ri-image-ai-line'></i> Original", url: src.original },
+      { label: "<i class='ri-mac-line'></i> Large", url: src.large },
+      { label: "<i class='ri-macbook-line'></i> Medium", url: src.medium },
+      { label: "<i class='ri-tablet-line'></i> Small", url: src.small },
+      { label: "<i class='ri-smartphone-line'></i> Tiny", url: src.tiny },
+    ];
+  
+    // Simulate loading time for demonstration
+    setTimeout(() => {
+      // Create resolution options
+      resolutions.forEach((res) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <button
+            class="w-full text-left bg-transparent text-white px-4 py-2 rounded-full border hover:border-blue-500 hover:bg-blue-600"
+            data-url="${res.url}"
+          >
+            ${res.label}
+          </button>
+        `;
+  
+        // Add click event to download the image
+        li.querySelector("button").addEventListener("click", () => {
+          const downloadLink = document.createElement("a");
+          downloadLink.href = res.url;
+          downloadLink.download = "image.jpg"; // Set a default file name
+          downloadLink.click();
+        });
+  
+        resolutionOptions.appendChild(li);
+      });
+  
+      // Hide the loader and show other elements
+      modalLoader.classList.add("hidden");
+      selectedImage.classList.remove("hidden");
+      resolutionOptions.classList.remove("hidden");
+    }, 1000); // Simulate 1-second loading time
   };
+  
 
 // Close the modal
 closeModalBtn.addEventListener("click", () => {
