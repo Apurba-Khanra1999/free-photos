@@ -174,4 +174,7 @@ window.addEventListener("scroll", () => {
 
 // Initial load
 loadPhotos();
+
+
+
   
