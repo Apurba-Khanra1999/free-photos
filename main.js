@@ -28,6 +28,9 @@ const modalUsername = document.getElementById("modal-username");
 const modalUseremail = document.getElementById("modal-useremail");
 const logoutBtn = document.getElementById("logout-btn");
 
+let isLogoutTriggered = false; // Flag to handle logout behavior
+let loginRetryDelay = 3000; // Retry delay for login popup in milliseconds
+
 // Store user data in local storage
 function storeUserData(user) {
   localStorage.setItem("userName", user.displayName);
@@ -50,17 +53,33 @@ function getUserDataFromLocalStorage() {
 // Recursive function to ensure successful login
 async function ensureLogin() {
   try {
+    const user = auth.currentUser;
+
+    // Skip the login popup if the user is already logged in
+    if (user) {
+      console.log("User already logged in:", user);
+      return;
+    }
+
     const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    storeUserData(user);
+    const loggedInUser = result.user;
+
+    storeUserData(loggedInUser);
     getUserDataFromLocalStorage();
 
     // Switch UI
     loginContainer.classList.add("hidden");
     profileContainer.classList.remove("hidden");
+    console.log("User logged in successfully:", loggedInUser);
   } catch (error) {
-    console.error("Login failed or popup closed, retrying...");
-    ensureLogin(); // Retry login
+    if (error.code === "auth/popup-closed-by-user") {
+      console.log("Popup closed by user. Retrying login in 3 seconds...");
+      setTimeout(() => {
+        ensureLogin(); // Retry login after a delay
+      }, loginRetryDelay);
+    } else {
+      console.error("Error during login:", error.message);
+    }
   }
 }
 
@@ -89,6 +108,9 @@ modal.addEventListener("click", (e) => {
 logoutBtn.addEventListener("click", () => {
   signOut(auth)
     .then(() => {
+      isLogoutTriggered = true; // Mark logout triggered
+      console.log("User logged out. Login popup will reappear after delay.");
+
       // Clear local storage
       localStorage.clear();
 
@@ -97,8 +119,11 @@ logoutBtn.addEventListener("click", () => {
       loginContainer.classList.remove("hidden");
       modal.classList.add("hidden");
 
-      // Restart login process
-      ensureLogin();
+      // Delay login retry
+      setTimeout(() => {
+        isLogoutTriggered = false; // Reset logout flag
+        ensureLogin();
+      }, loginRetryDelay);
     })
     .catch((error) => {
       console.error("Logout error:", error.message);
@@ -108,9 +133,7 @@ logoutBtn.addEventListener("click", () => {
 // Initialize UI on page load
 window.onload = function () {
   onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      ensureLogin(); // Start login process if not logged in
-    } else {
+    if (user) {
       // User is already logged in
       storeUserData(user);
       getUserDataFromLocalStorage();
@@ -119,6 +142,9 @@ window.onload = function () {
       loginContainer.classList.add("hidden");
       profileContainer.classList.remove("hidden");
       console.log("User is already logged in:", user);
+    } else {
+      // Start login process if not logged in
+      ensureLogin();
     }
   });
 };
